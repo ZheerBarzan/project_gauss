@@ -83,6 +83,12 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.blue);
                       } else if (index == 1) {
                         return Buttons(
+                            buttonPressed: () {
+                              setState(() {
+                                question =
+                                    question.substring(0, question.length - 1);
+                              });
+                            },
                             buttonText: buttons[index],
                             textColor: Colors.white,
                             color: Colors.red);
