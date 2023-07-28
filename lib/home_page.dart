@@ -37,86 +37,92 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.grey,
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              child: Container(
+    return SafeArea(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          backgroundColor: Colors.grey,
+          body: Column(
+            children: <Widget>[
+              Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Container(
                       padding: const EdgeInsets.all(20),
                       alignment: Alignment.centerLeft,
-                      child: Text(question),
+                      child: Text(
+                        question,
+                        style: const TextStyle(fontSize: 40),
+                      ),
                     ),
                     Container(
                       padding: const EdgeInsets.all(20),
                       alignment: Alignment.centerRight,
-                      child: Text(answer),
+                      child: Text(
+                        answer,
+                        style: const TextStyle(fontSize: 40),
+                      ),
                     ),
                   ],
                 ),
               ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Center(
-                child: GridView.builder(
-                    itemCount: buttons.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 4),
-                    itemBuilder: (BuildContext context, int index) {
-                      if (index == 0) {
-                        return Buttons(
+              Expanded(
+                flex: 2,
+                child: Center(
+                  child: GridView.builder(
+                      itemCount: buttons.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4),
+                      itemBuilder: (BuildContext context, int index) {
+                        if (index == 0) {
+                          return Buttons(
+                              buttonPressed: () {
+                                setState(() {
+                                  question = "";
+                                });
+                              },
+                              buttonText: buttons[index],
+                              textColor: Colors.white,
+                              color: Colors.blue);
+                        } else if (index == 1) {
+                          return Buttons(
+                              buttonPressed: () {
+                                setState(() {
+                                  question = question.substring(
+                                      0, question.length - 1);
+                                });
+                              },
+                              buttonText: buttons[index],
+                              textColor: Colors.white,
+                              color: Colors.red);
+                        } else if (index == 18) {
+                          return Buttons(
+                              buttonText: buttons[index],
+                              textColor: Colors.black,
+                              color: Colors.yellow);
+                        } else {
+                          return Buttons(
                             buttonPressed: () {
                               setState(() {
-                                question = "";
+                                question += buttons[index];
                               });
                             },
                             buttonText: buttons[index],
-                            textColor: Colors.white,
-                            color: Colors.blue);
-                      } else if (index == 1) {
-                        return Buttons(
-                            buttonPressed: () {
-                              setState(() {
-                                question =
-                                    question.substring(0, question.length - 1);
-                              });
-                            },
-                            buttonText: buttons[index],
-                            textColor: Colors.white,
-                            color: Colors.red);
-                      } else if (index == 18) {
-                        return Buttons(
-                            buttonText: buttons[index],
-                            textColor: Colors.black,
-                            color: Colors.yellow);
-                      } else {
-                        return Buttons(
-                          buttonPressed: () {
-                            setState(() {
-                              question += buttons[index];
-                            });
-                          },
-                          buttonText: buttons[index],
-                          textColor: isOperator(buttons[index])
-                              ? Colors.black
-                              : Colors.white,
-                          color: isOperator(buttons[index])
-                              ? Colors.white
-                              : Colors.black,
-                        );
-                      }
-                    }),
-              ),
-            )
-          ],
+                            textColor: isOperator(buttons[index])
+                                ? Colors.black
+                                : Colors.white,
+                            color: isOperator(buttons[index])
+                                ? Colors.white
+                                : Colors.black,
+                          );
+                        }
+                      }),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
