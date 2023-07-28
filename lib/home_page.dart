@@ -9,6 +9,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var question = "";
+  var answer = "";
+
   final List<String> buttons = [
     "AC",
     "DEL",
@@ -35,12 +38,29 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey,
         body: Column(
           children: <Widget>[
             Expanded(
-              child: Container(),
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.all(20),
+                      alignment: Alignment.centerLeft,
+                      child: Text(question),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(20),
+                      alignment: Alignment.centerRight,
+                      child: Text(answer),
+                    ),
+                  ],
+                ),
+              ),
             ),
             Expanded(
               flex: 2,
@@ -53,6 +73,11 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (BuildContext context, int index) {
                       if (index == 0) {
                         return Buttons(
+                            buttonPressed: () {
+                              setState(() {
+                                question = "";
+                              });
+                            },
                             buttonText: buttons[index],
                             textColor: Colors.white,
                             color: Colors.blue);
@@ -68,6 +93,11 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.yellow);
                       } else {
                         return Buttons(
+                          buttonPressed: () {
+                            setState(() {
+                              question += buttons[index];
+                            });
+                          },
                           buttonText: buttons[index],
                           textColor: isOperator(buttons[index])
                               ? Colors.black
