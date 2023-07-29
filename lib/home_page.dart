@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'buttons.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,24 +16,24 @@ class _HomePageState extends State<HomePage> {
   final List<String> buttons = [
     "AC",
     "DEL",
-    "%",
-    "/",
+    " % ",
+    " / ",
     "9",
     "8",
     "7",
-    "*",
+    " x ",
     "6",
     "5",
     "4",
-    "-",
+    " - ",
     "3",
     "2",
     "1",
-    "+",
+    " + ",
     "0",
     ".",
-    "ANS",
-    "=",
+    "00",
+    " = ",
   ];
 
   @override
@@ -81,6 +82,7 @@ class _HomePageState extends State<HomePage> {
                               buttonPressed: () {
                                 setState(() {
                                   question = "";
+                                  answer = "";
                                 });
                               },
                               buttonText: buttons[index],
@@ -97,11 +99,16 @@ class _HomePageState extends State<HomePage> {
                               buttonText: buttons[index],
                               textColor: Colors.white,
                               color: Colors.red);
-                        } else if (index == 18) {
+                        } else if (index == buttons.length - 1) {
                           return Buttons(
+                              buttonPressed: () {
+                                setState(() {
+                                  equalPressed();
+                                });
+                              },
                               buttonText: buttons[index],
-                              textColor: Colors.black,
-                              color: Colors.yellow);
+                              textColor: Colors.white,
+                              color: Colors.black);
                         } else {
                           return Buttons(
                             buttonPressed: () {
@@ -134,5 +141,15 @@ class _HomePageState extends State<HomePage> {
     } else {
       return false;
     }
+  }
+
+  void equalPressed() {
+    String finalQuestion = question;
+    finalQuestion = finalQuestion.replaceAll(" x ", "*");
+    Parser p = Parser();
+    Expression expression = p.parse(finalQuestion);
+    ContextModel contextModel = ContextModel();
+    double evaluation = expression.evaluate(EvaluationType.REAL, contextModel);
+    answer = evaluation.toString();
   }
 }
