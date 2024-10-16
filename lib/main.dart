@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_gauss/home_page.dart';
+import 'package:project_gauss/views/home_page.dart';
 import 'package:project_gauss/theme/theme_provider.dart';
 
 import 'package:provider/provider.dart';

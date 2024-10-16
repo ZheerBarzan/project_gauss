@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_gauss/neu_box.dart';
+import 'package:project_gauss/components/neu_box.dart';
 
 class Buttons extends StatelessWidget {
   final color;

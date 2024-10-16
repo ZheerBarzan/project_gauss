@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'buttons.dart';
+import '../components/buttons.dart';
 import 'package:math_expressions/math_expressions.dart';
 
 class HomePage extends StatefulWidget {
