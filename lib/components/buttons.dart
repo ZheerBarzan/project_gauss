@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_gauss/neu_box.dart';
 
 class Buttons extends StatelessWidget {
   final color;
@@ -14,14 +15,16 @@ class Buttons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: buttonPressed,
-      child: Padding(
-        padding: const EdgeInsets.all(5),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(25),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: NeuBox(
+        child: GestureDetector(
+          onTap: buttonPressed,
           child: Container(
-            color: color,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: color,
+            ),
             child: Center(
               child: Text(
                 buttonText,
